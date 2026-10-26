@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-10-26T17:20:03.977Z",
+  "checks": [
+    {
+      "label": "inicio ISS y motor en vivo",
+      "ok": true
+    },
+    {
+      "label": "búsqueda NORAD y selección real",
+      "ok": true
+    },
+    {
+      "label": "capa acotada a 40 Starlink",
+      "ok": true
+    },
+    {
+      "label": "agenda con gráfico polar y AOS/TCA/LOS",
+      "ok": true
+    },
+    {
+      "label": "orientación informa ausencia de sensores web",
+      "ok": true
+    },
+    {
+      "label": "comparación real Where the ISS at?",
+      "ok": true
+    },
+    {
+      "label": "exportación CSV",
+      "ok": true
+    },
+    {
+      "label": "validación de coordenadas inválidas",
+      "ok": true
+    },
+    {
+      "label": "vista previa de aviso web (no prueba nativa)",
+      "ok": true
+    },
+    {
+      "label": "viewport móvil 390 px sin desborde horizontal",
+      "ok": true
+    },
+    {
+      "label": "primer inicio sin APIs usa snapshot real y lo identifica",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "consoleErrors": []
+}

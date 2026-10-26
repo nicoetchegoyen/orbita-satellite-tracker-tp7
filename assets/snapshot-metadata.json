@@ -1,0 +1,26 @@
+{
+  "retrievedAt": "2026-10-26T16:55:16.311Z",
+  "description": "Datos reales para primer inicio sin red. No se modifica su epoch; la UI alerta sobre antigüedad.",
+  "counts": [
+    {
+      "group": "stations",
+      "count": 20
+    },
+    {
+      "group": "starlink",
+      "count": 80
+    },
+    {
+      "group": "gps-ops",
+      "count": 12
+    },
+    {
+      "group": "weather",
+      "count": 12
+    },
+    {
+      "group": "geo",
+      "count": 12
+    }
+  ]
+}
