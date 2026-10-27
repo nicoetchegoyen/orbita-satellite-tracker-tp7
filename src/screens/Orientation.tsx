@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, Platform, useWindowDimensions } from 'react-native';
+import { View, Platform, useWindowDimensions } from 'react-native';
 import Svg, { Circle, Line, Path, G, Text as SvgText } from 'react-native-svg';
 import * as Location from 'expo-location';
 import { DeviceMotion } from 'expo-sensors';
+import { Text } from '../ui/Text';
 import type { Tracker } from '../hooks/useTracker';
 import { C, ui, mono } from '../ui/theme';
-import { Button, Badge } from '../ui/components';
+import { Button, Badge, PageHeading } from '../ui/components';
 import { direction } from '../ui/format';
 export function Orientation({ tracker: t }: { tracker: Tracker }) {
   const [heading, setHeading] = useState<number | null>(null),
@@ -76,15 +77,12 @@ export function Orientation({ tracker: t }: { tracker: Tracker }) {
   const wide = useWindowDimensions().width > 1050;
   return (
     <View style={{ gap: 24 }}>
-      <View>
-        <Text style={ui.label}>ORIENTACIÓN ASISTIDA</Text>
-        <Text style={[ui.h1, { marginTop: 8 }]}>
-          Mirá en la dirección correcta<Text style={{ color: C.lime }}>.</Text>
-        </Text>
-        <Text style={[ui.body, { marginTop: 7 }]}>
-          Azimut y elevación de {t.selected?.name} desde tu ubicación.
-        </Text>
-      </View>
+      <PageHeading
+        index="03"
+        eyebrow="ORIENTACIÓN ASISTIDA"
+        title="Encontrá el norte."
+        description="Azimut y elevación de tu satélite, desde tu lugar en la Tierra."
+      />
       <View style={{ flexDirection: wide ? 'row' : 'column', gap: 20 }}>
         <View style={[ui.card, { flex: 1, padding: 28, alignItems: 'center', gap: 22 }]}>
           <Badge
@@ -95,7 +93,7 @@ export function Orientation({ tracker: t }: { tracker: Tracker }) {
           />
           <View style={{ width: '100%', maxWidth: 380, aspectRatio: 1 }}>
             <Svg viewBox="0 0 360 360" width="100%" height="100%">
-              <Circle cx="180" cy="180" r="151" fill="#0B1522" stroke={C.border} />
+              <Circle cx="180" cy="180" r="151" fill={C.bg} stroke={C.border} />
               <Circle
                 cx="180"
                 cy="180"

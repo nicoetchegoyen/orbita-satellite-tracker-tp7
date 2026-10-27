@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, Platform, Share } from 'react-native';
+import { View, ScrollView, Platform, Share } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Text } from '../ui/Text';
 import type { Tracker } from '../hooks/useTracker';
 import type { ValidationResult } from '../core/types';
 import { validatePosition } from '../services/validation';
 import { C, ui, mono } from '../ui/theme';
-import { Button, Chip, Empty, Badge } from '../ui/components';
+import { Button, Chip, Empty, Badge, PageHeading } from '../ui/components';
 import { time, date } from '../ui/format';
 export function Validation({ tracker: t }: { tracker: Tracker }) {
   const [source, setSource] = useState<'wheretheiss' | 'n2yo'>(
@@ -68,15 +69,12 @@ export function Validation({ tracker: t }: { tracker: Tracker }) {
   const last = results[0];
   return (
     <View style={{ gap: 22 }}>
-      <View>
-        <Text style={ui.label}>PRECISIÓN Y TRAZABILIDAD</Text>
-        <Text style={[ui.h1, { marginTop: 8 }]}>
-          Contrastá cada kilómetro<Text style={{ color: C.lime }}>.</Text>
-        </Text>
-        <Text style={[ui.body, { marginTop: 7 }]}>
-          SGP4 local frente a una fuente externa, en el mismo instante UTC.
-        </Text>
-      </View>
+      <PageHeading
+        index="04"
+        eyebrow="PRECISIÓN Y TRAZABILIDAD"
+        title="Cada kilómetro cuenta."
+        description="Contrastá el cálculo orbital con fuentes independientes."
+      />
       <View style={[ui.card, { padding: 24, gap: 20 }]}>
         <View style={[ui.between, { flexWrap: 'wrap', gap: 12 }]}>
           <View>

@@ -40,6 +40,7 @@ const config: ExpoConfig = {
     ['expo-notifications', { color: '#B5F36B', defaultChannel: 'passes' }],
     'expo-background-task',
     'expo-status-bar',
+    'expo-font',
     [
       'expo-sensors',
       { motionPermission: 'La orientación del dispositivo permite apuntar hacia el satélite.' },

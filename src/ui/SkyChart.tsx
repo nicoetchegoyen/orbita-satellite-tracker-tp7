@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import Svg, {
   Circle,
   Line,
@@ -42,11 +42,11 @@ export function SkyChart({
       <Svg width="100%" height="100%" viewBox="0 0 320 320">
         <Defs>
           <LinearGradient id="sky" x1="0" y1="1" x2="1" y2="0">
-            <Stop offset="0" stopColor="#6B9A58" />
+            <Stop offset="0" stopColor={C.green} />
             <Stop offset="1" stopColor={C.lime} />
           </LinearGradient>
         </Defs>
-        <Circle cx="160" cy="160" r="130" fill="#0C1624" stroke="#354455" strokeWidth="1" />
+        <Circle cx="160" cy="160" r="130" fill={C.bg} stroke="#A7B6A4" strokeWidth="1" />
         {[43.33, 86.66].map((r) => (
           <Circle
             key={r}
@@ -54,7 +54,7 @@ export function SkyChart({
             cy="160"
             r={r}
             fill="none"
-            stroke="#2B394A"
+            stroke="#CED4C8"
             strokeDasharray="3 5"
           />
         ))}
@@ -65,7 +65,7 @@ export function SkyChart({
             y1="160"
             x2="290"
             y2="160"
-            stroke="#2B394A"
+            stroke="#CED4C8"
             strokeWidth=".7"
             transform={`rotate(${a} 160 160)`}
           />

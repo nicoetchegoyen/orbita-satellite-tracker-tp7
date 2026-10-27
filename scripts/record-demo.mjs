@@ -32,10 +32,10 @@ try {
     waitUntil: 'domcontentloaded',
     timeout: 60000,
   });
-  await page.getByText('Tu ventana al espacio.', { exact: true }).waitFor({ timeout: 30000 });
+  await page.getByRole('heading', { name: /Mirá más allá/ }).waitFor({ timeout: 30000 });
   await pause(4000);
   await check('inicio ISS y motor en vivo', async () => {
-    await page.getByText('ISS (ZARYA)', { exact: true }).waitFor();
+    await page.getByText('ISS (ZARYA)', { exact: true }).first().waitFor();
   });
   await page.screenshot({ path: path.join(output, '01-explorar.png') });
   await pause(1500);
@@ -59,7 +59,7 @@ try {
   await page.getByRole('tab', { name: 'Próximos pases', exact: true }).click();
   await pause(2000);
   await check('agenda con gráfico polar y AOS/TCA/LOS', async () => {
-    await page.getByText('TRAYECTORIA EN TU CIELO', { exact: true }).waitFor();
+    await page.getByText('TU MAPA DEL CIELO', { exact: true }).waitFor();
     await page.getByText('LOS', { exact: true }).first().waitFor();
   });
   await page.screenshot({ path: path.join(output, '03-pases.png') });
@@ -121,7 +121,7 @@ try {
   const m = await mobile.newPage();
   m.on('pageerror', (e) => errors.push(e.message));
   await m.goto('http://127.0.0.1:8081', { waitUntil: 'domcontentloaded' });
-  await m.getByText('Tu ventana al espacio.', { exact: true }).waitFor();
+  await m.getByRole('heading', { name: /Mirá más allá/ }).waitFor();
   await m.waitForTimeout(3500);
   await m.screenshot({ path: path.join(output, '07-mobile.png'), fullPage: true });
   await check('viewport móvil 390 px sin desborde horizontal', async () => {
@@ -130,7 +130,7 @@ try {
     );
     if (overflow) throw new Error('Horizontal overflow');
   });
-  await m.getByText('SATÉLITE EN FOCO', { exact: true }).scrollIntoViewIfNeeded();
+  await m.getByText('FICHA ORBITAL', { exact: true }).scrollIntoViewIfNeeded();
   await m.screenshot({ path: path.join(output, '07b-mobile-telemetria.png') });
   await m.getByRole('tab', { name: 'Próximos pases', exact: true }).click();
   await m.waitForTimeout(1000);
@@ -142,7 +142,7 @@ try {
   await o.route('**/api/catalog**', (route) => route.abort());
   await o.route('https://celestrak.org/**', (route) => route.abort());
   await o.goto('http://127.0.0.1:8081', { waitUntil: 'domcontentloaded' });
-  await o.getByText('CACHÉ LOCAL', { exact: true }).waitFor({ timeout: 30000 });
+  await o.getByText('DATOS GUARDADOS', { exact: true }).waitFor({ timeout: 30000 });
   await check('primer inicio sin APIs usa snapshot real y lo identifica', async () => {
     await o.getByText('ISS (ZARYA)', { exact: true }).waitFor();
   });

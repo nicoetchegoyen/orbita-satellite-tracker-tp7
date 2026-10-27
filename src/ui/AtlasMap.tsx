@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, View, StyleSheet, Pressable, Text } from 'react-native';
+import { Animated, View, StyleSheet, Pressable } from 'react-native';
+import { Text } from './Text';
 import Svg, {
   Path,
   Line,
@@ -89,13 +90,13 @@ export default function AtlasMap(props: SatelliteMapProps) {
       >
         <Defs>
           <Pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse">
-            <Circle cx=".4" cy=".4" r=".22" fill="#233446" />
+            <Circle cx=".4" cy=".4" r=".22" fill="#53705B" opacity=".5" />
           </Pattern>
           <ClipPath id="bounds">
             <Rect width="360" height="180" />
           </ClipPath>
         </Defs>
-        <Rect width="360" height="180" fill="#0C1725" />
+        <Rect width="360" height="180" fill={C.map} />
         <Rect width="360" height="180" fill="url(#dots)" />
         <G clipPath="url(#bounds)">
           {Array.from({ length: 11 }, (_, i) => (
@@ -105,7 +106,8 @@ export default function AtlasMap(props: SatelliteMapProps) {
               y1="0"
               x2={(i + 1) * 30}
               y2="180"
-              stroke="#273747"
+              stroke="#52705B"
+              strokeOpacity=".25"
               strokeWidth=".2"
             />
           ))}
@@ -116,17 +118,19 @@ export default function AtlasMap(props: SatelliteMapProps) {
               y1={(i + 1) * 30}
               x2="360"
               y2={(i + 1) * 30}
-              stroke="#273747"
+              stroke="#52705B"
+              strokeOpacity=".25"
               strokeWidth=".2"
             />
           ))}
-          <Path d={atlas.path} fill="#1D3041" stroke="#3D5160" strokeWidth=".35" />
+          <Path d={atlas.path} fill={C.mapLand} stroke={C.mapStroke} strokeWidth=".35" />
           <Line
             x1="0"
             y1="90"
             x2="360"
             y2="90"
-            stroke="#456172"
+            stroke="#8CA591"
+            strokeOpacity=".45"
             strokeWidth=".3"
             strokeDasharray="2 2"
           />
@@ -137,9 +141,9 @@ export default function AtlasMap(props: SatelliteMapProps) {
                 key={offset}
                 d={capPath(position, minElevation)}
                 transform={`translate(${offset} 0)`}
-                fill={C.lime}
+                fill={C.mapAccent}
                 fillOpacity=".075"
-                stroke={C.lime}
+                stroke={C.mapAccent}
                 strokeOpacity=".5"
                 strokeWidth=".45"
               />
@@ -150,7 +154,7 @@ export default function AtlasMap(props: SatelliteMapProps) {
                 key={`p${i}`}
                 d={pathOf(p)}
                 fill="none"
-                stroke={C.lime}
+                stroke={C.mapAccent}
                 strokeOpacity=".4"
                 strokeWidth=".65"
                 strokeDasharray="2 2"
@@ -158,26 +162,30 @@ export default function AtlasMap(props: SatelliteMapProps) {
             ))}
           {showTrack &&
             future.map((p, i) => (
-              <Path key={`f${i}`} d={pathOf(p)} fill="none" stroke={C.lime} strokeWidth=".8" />
+              <Path key={`f${i}`} d={pathOf(p)} fill="none" stroke={C.mapAccent} strokeWidth=".8" />
             ))}
           {constellation.map((p, i) => {
             const q = project(p);
-            return <Circle key={i} cx={q.x} cy={q.y} r=".8" fill={C.blue} opacity=".85" />;
+            return <Circle key={i} cx={q.x} cy={q.y} r=".8" fill="#C6D8C1" opacity=".85" />;
           })}
-          <Circle cx={o.x} cy={o.y} r="3.2" fill={C.blue} fillOpacity=".15" />
-          <Circle cx={o.x} cy={o.y} r="1.2" fill={C.blue} />
-          <SvgText x={o.x + 3} y={o.y + 1} fill="#ADBFCE" fontSize="3" fontWeight="500">
-            {observer.source === 'gps' ? 'TU UBICACIÓN' : observer.name.toUpperCase()}
-          </SvgText>
-          <SvgText x="12" y="78" fill="#526B7E" fontSize="3.1" letterSpacing=".8">
-            PACÍFICO
-          </SvgText>
-          <SvgText x="145" y="108" fill="#526B7E" fontSize="3.1" letterSpacing=".8">
-            ATLÁNTICO
-          </SvgText>
-          <SvgText x="242" y="113" fill="#526B7E" fontSize="3.1" letterSpacing=".8">
-            ÍNDICO
-          </SvgText>
+          <Circle cx={o.x} cy={o.y} r="3.2" fill="#C6D8C1" fillOpacity=".15" />
+          <Circle cx={o.x} cy={o.y} r="1.2" fill="#C6D8C1" />
+          {size.width > 600 && (
+            <>
+              <SvgText x={o.x + 3} y={o.y + 1} fill="#D5DFC9" fontSize="3" fontWeight="500">
+                {observer.source === 'gps' ? 'TU UBICACIÓN' : observer.name.toUpperCase()}
+              </SvgText>
+              <SvgText x="12" y="78" fill="#8CA591" fontSize="4" letterSpacing=".8">
+                PACÍFICO
+              </SvgText>
+              <SvgText x="145" y="108" fill="#8CA591" fontSize="4" letterSpacing=".8">
+                ATLÁNTICO
+              </SvgText>
+              <SvgText x="242" y="113" fill="#8CA591" fontSize="4" letterSpacing=".8">
+                ÍNDICO
+              </SvgText>
+            </>
+          )}
         </G>
       </Svg>
       {position && (
@@ -187,7 +195,7 @@ export default function AtlasMap(props: SatelliteMapProps) {
         >
           <View style={styles.markerHalo}>
             <View style={styles.markerCore}>
-              <Icon name="orbit" size={17} color={C.bg} />
+              <Icon name="orbit" size={17} color={C.ink} />
             </View>
           </View>
         </Animated.View>
@@ -199,7 +207,7 @@ export default function AtlasMap(props: SatelliteMapProps) {
           onPress={() => setZoom((z) => Math.min(4, z * 1.5))}
           style={styles.control}
         >
-          <Icon name="plus" size={17} />
+          <Icon name="plus" size={17} color={C.mapText} />
         </Pressable>
         <Pressable
           accessibilityRole="button"
@@ -207,7 +215,7 @@ export default function AtlasMap(props: SatelliteMapProps) {
           onPress={() => setZoom((z) => Math.max(1, z / 1.5))}
           style={styles.control}
         >
-          <Icon name="minus" size={17} />
+          <Icon name="minus" size={17} color={C.mapText} />
         </Pressable>
         <Pressable
           accessibilityRole="button"
@@ -218,29 +226,31 @@ export default function AtlasMap(props: SatelliteMapProps) {
           }}
           style={styles.control}
         >
-          <Icon name="target" size={17} color={follow ? C.lime : C.muted} />
+          <Icon name="target" size={17} color={follow ? C.mapAccent : C.mapText} />
         </Pressable>
       </View>
       <View style={styles.coordinates}>
-        <Text style={{ fontFamily: mono, fontSize: 9, color: C.dim }}>W 180°</Text>
-        <Text style={{ fontFamily: mono, fontSize: 9, color: C.dim }}>ATLAS MUNDIAL · WGS84</Text>
-        <Text style={{ fontFamily: mono, fontSize: 9, color: C.dim }}>180° E</Text>
+        <Text style={{ fontFamily: mono, fontSize: 9, color: C.mapText }}>W 180°</Text>
+        <Text style={{ fontFamily: mono, fontSize: 9, color: C.mapText }}>
+          ATLAS MUNDIAL · WGS84
+        </Text>
+        <Text style={{ fontFamily: mono, fontSize: 9, color: C.mapText }}>180° E</Text>
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0C1725', overflow: 'hidden', minHeight: 160 },
+  container: { flex: 1, backgroundColor: C.map, overflow: 'hidden', minHeight: 160 },
   controls: { position: 'absolute', top: 18, right: 16, gap: 5 },
   control: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#101C2BEF',
+    width: 44,
+    height: 44,
+    backgroundColor: '#173A30EF',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 7,
+    borderRadius: 3,
     borderWidth: 1,
-    borderColor: C.border,
+    borderColor: '#68847380',
   },
   coordinates: {
     position: 'absolute',
@@ -255,9 +265,9 @@ const styles = StyleSheet.create({
     width: 46,
     height: 46,
     borderRadius: 30,
-    backgroundColor: '#BBF57818',
+    backgroundColor: '#FF916918',
     borderWidth: 1,
-    borderColor: '#BBF57844',
+    borderColor: '#FF916966',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -265,7 +275,7 @@ const styles = StyleSheet.create({
     width: 27,
     height: 27,
     borderRadius: 20,
-    backgroundColor: C.lime,
+    backgroundColor: C.mapAccent,
     alignItems: 'center',
     justifyContent: 'center',
   },

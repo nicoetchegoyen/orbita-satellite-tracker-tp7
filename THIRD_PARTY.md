@@ -1,5 +1,7 @@
 # Recursos y bibliotecas
 
+- **Space Grotesk** y **IBM Plex Mono**: tipografías distribuidas por @expo-google-fonts bajo SIL Open Font License. Se cargan desde archivos locales mediante expo-font, también en Expo Go.
+
 - **satellite.js 6.0.2**: algoritmo SGP4/SDP4, licencia MIT. [Repositorio](https://github.com/shashwatak/satellite-js). Se conserva la licencia distribuida por npm en el paquete instalado.
 - **Natural Earth 1:110m**, distribuido por **world-atlas** y convertido con topojson-client/d3-geo: datos cartográficos de dominio público. [Condiciones de uso](https://www.naturalearthdata.com/about/terms-of-use/).
 - **CelesTrak**: elementos orbitales GP/SupGP obtenidos de los endpoints públicos, con atribución y epoch conservados en cada objeto. [Uso](https://celestrak.org/usage-policy.php). No se presenta como API oficial de Starlink.

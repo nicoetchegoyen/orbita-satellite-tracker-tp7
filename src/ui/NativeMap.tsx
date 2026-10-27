@@ -62,7 +62,7 @@ export default function NativeMap({
           <Polyline
             key={`p${i}`}
             coordinates={points}
-            strokeColor="#BBF57880"
+            strokeColor={C.accent + '80'}
             strokeWidth={2}
             lineDashPattern={[6, 5]}
           />
@@ -75,8 +75,8 @@ export default function NativeMap({
         <Circle
           center={position}
           radius={EARTH_RADIUS * 1000 * footprintRadius(position.altitude, minElevation)}
-          fillColor="#BBF57819"
-          strokeColor="#BBF578AA"
+          fillColor={C.accent + '19'}
+          strokeColor={C.accent + 'AA'}
           strokeWidth={1}
         />
       )}

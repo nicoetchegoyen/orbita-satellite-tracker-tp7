@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Switch, Platform } from 'react-native';
+import { View, TextInput, Switch, Platform } from 'react-native';
+import { Text } from '../ui/Text';
 import type { Tracker } from '../hooks/useTracker';
 import { C, ui } from '../ui/theme';
-import { Button, Chip, Badge, SectionTitle } from '../ui/components';
+import { Button, Chip, Badge, SectionTitle, PageHeading } from '../ui/components';
 import { providerHealth, apiUrl } from '../data/client';
 import { testNotification, listReminders, cancelReminder } from '../services/reminders';
 import type { Reminder } from '../services/reminders';
@@ -76,15 +77,12 @@ export function Settings({ tracker: t }: { tracker: Tracker }) {
   }
   return (
     <View style={{ gap: 22 }}>
-      <View>
-        <Text style={ui.label}>TU ESTACIÓN EN TIERRA</Text>
-        <Text style={[ui.h1, { marginTop: 8 }]}>
-          Ajustes de misión<Text style={{ color: C.lime }}>.</Text>
-        </Text>
-        <Text style={[ui.body, { marginTop: 7 }]}>
-          Configurá tu observador, los pases y las alertas.
-        </Text>
-      </View>
+      <PageHeading
+        index="05"
+        eyebrow="TU ESTACIÓN EN TIERRA"
+        title="Todo empieza acá."
+        description="Tu ubicación, tus pases y tu manera de observar el cielo."
+      />
       <View style={[ui.card, { padding: 24, gap: 20 }]}>
         <SectionTitle
           title="Ubicación del observador"

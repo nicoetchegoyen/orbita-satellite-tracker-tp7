@@ -2,6 +2,10 @@
 
 Aplicación **React Native + Expo + TypeScript** para seguir satélites reales, calcular posiciones SGP4/SDP4 en el dispositivo, predecir pases y preparar observaciones. Incluye proxy Node para custodiar credenciales, atlas offline y versión web para revisar la interfaz.
 
+La interfaz **ÓRBITA** utiliza una estética de atlas científico: marfil, verde tinta y terracota, con Space Grotesk e IBM Plex Mono empaquetadas localmente. La agenda usa fichas horizontales en celular y una lista junto al sky chart en escritorio; todos los cálculos y proveedores se mantienen compartidos entre plataformas.
+
+![ÓRBITA: mapa de seguimiento y ficha orbital](docs/evidence/redesign/desktop-1440.png)
+
 ## Ejecutar
 
 Requisitos: Node.js 22 o 24 y npm. Las versiones exactas están fijadas en `package-lock.json`.
